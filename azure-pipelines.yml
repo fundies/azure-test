@@ -1,0 +1,16 @@
+- job: Test
+  displayName: 'Test'
+  variables:
+    TEST_HARNESS: "true"
+    TRAVIS_OS_NAME: "linux"
+    TRAVIS: "true"
+    TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
+    TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
+  pool:
+    vmImage: 'ubuntu-20.04'
+
+  steps:
+    - checkout: self
+      persistCredentials: true
+      
+    - script: ./test.sh
