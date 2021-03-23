@@ -16,7 +16,7 @@ jobs:
       
     - script: ./test.sh
     
-- job: Test
+- job: Test2
   displayName: 'Test 2'
   variables:
     TEST_HARNESS: "true"
