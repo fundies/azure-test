@@ -16,6 +16,6 @@ Xvfb :99 -s "-screen 0 1024x768x24" &
 openbox-session &
 sleep 5
 #./emake -o /tmp/test -r &
-glxgears
+glxgears &
 sleep 5
 wmctrl -l
