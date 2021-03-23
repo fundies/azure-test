@@ -15,3 +15,20 @@ jobs:
       persistCredentials: true
       
     - script: ./test.sh
+    
+- job: Test
+  displayName: 'Test 2'
+  variables:
+    TEST_HARNESS: "true"
+    TRAVIS_OS_NAME: "linux"
+    TRAVIS: "true"
+    TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
+    TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
+  pool:
+    vmImage: 'ubuntu-18.04'
+
+  steps:
+    - checkout: self
+      persistCredentials: true
+      
+    - script: ./test.sh
