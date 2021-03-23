@@ -19,3 +19,4 @@ sleep 5
 xclock &
 sleep 5
 wmctrl -l
+import -window 0 /tmp/test.png
