@@ -15,4 +15,6 @@ export DISPLAY=:99.0
 Xvfb :99 -s "-screen 0 1024x768x24" &
 openbox-session &
 sleep 5
-./test-runner
+./emake -o /tmp/test -r &
+sleep 5
+wmctrl -l
