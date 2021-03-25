@@ -31,4 +31,4 @@ jobs:
     - checkout: self
       persistCredentials: true
       
-    - script: ./test.sh
+    - script: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
