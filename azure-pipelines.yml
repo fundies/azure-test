@@ -20,10 +20,10 @@ jobs:
       persistCredentials: true
       
     - script: |
-        ./CI/install_emake_deps.sh
         echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install --channel=1 "ndk;22.0.6917172;system-images;android-29;google_apis;x86'
         git clone https://github.com/enigma-dev/enigma-dev.git
         cd enigma-dev
+        ./CI/install_emake_deps.sh
         git clone --depth 1 https://github.com/enigma-dev/enigma-android.git android
         make -j4 && CLI_ENABLE_EGM=FALSE make -j4 emake
         ./ci-build.sh
