@@ -20,7 +20,7 @@ jobs:
       persistCredentials: true
       
     - script: |
-        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install --channel=1 'ndk;22.0.6917172;system-images;android-29;google_apis'
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --channel=1 --install "tools" "platform-tools" "extras;google;google_play_services" "extras;google;m2repository" "extras;android;m2repository" "build-tools;29.0.3" "platforms;android-29" "ndk;22.0.6917172"
         git clone https://github.com/enigma-dev/enigma-dev.git
         cd enigma-dev
         ./CI/install_emake_deps.sh
