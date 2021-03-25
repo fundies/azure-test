@@ -7,6 +7,11 @@ jobs:
     TRAVIS: "true"
     TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
     TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
+    COMPILER: Android 
+    GRAPHICS: OpenGLES2 
+    PLATFORM: SDL MODE=Compile 
+    ANDROID_API_LEVEL: 29 
+    ANDROID_BUILD_TOOLS_VERSION: 29.0.3
   pool:
     vmImage: 'ubuntu-20.04'
 
@@ -14,21 +19,11 @@ jobs:
     - checkout: self
       persistCredentials: true
       
-    - script: ./test.sh
-    
-- job: Test2
-  displayName: 'Test 2'
-  variables:
-    TEST_HARNESS: "true"
-    TRAVIS_OS_NAME: "linux"
-    TRAVIS: "true"
-    TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
-    TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
-  pool:
-    vmImage: 'ubuntu-18.04'
-
-  steps:
-    - checkout: self
-      persistCredentials: true
-      
-    - script: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
+    - script: |
+        ./CI/install_emake_deps.sh
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install --channel=1 "ndk;22.0.6917172;system-images;android-29;google_apis;x86'
+        git clone https://github.com/enigma-dev/enigma-dev.git
+        cd enigma-dev
+        git clone --depth 1 https://github.com/enigma-dev/enigma-android.git android
+        make -j4 && CLI_ENABLE_EGM=FALSE make -j4 emake
+        ./ci-build.sh
